@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://lixc931029.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://lixc931029.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://lixc931029.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+
+<link rel="prerender" href="https://lixc931029.github.io">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://lixc931029.github.io">
+<meta name="author" content="John Doe">
+
+<link rel="stylesheet" href="/css/JSimple.css">
+
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>js事件冒泡 - Hexo</title>
+
+<meta name="keywords" content="">
+
+<meta name="description " content="">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>Home</span></a>
+        <a href="/archives" title="Archives"><i class="fa fa-archives"></i><span>Archives</span></a>
+        <a href="/tags" title="Tags"><i class="fa fa-tags"></i><span>Tags</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-weixin"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">说IT</h1>
+        <h3 class="cover-siteTitle">用代码摇滚这个世界</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/tangkunyin" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href="https://twitter.com/tangkunyin" target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-weibo">
+        <a href="https://weibo.com/tangkunyin" target="_blank" title="weibo" ref="friend">
+            <i class="fa fa-weibo"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-instagram">
+        <a href="https://www.instagram.com/mtangsir/" target="_blank" title="instagram" ref="friend">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">Recent Posts</a></li>
+        
+            
+                <li class="">
+                    <a href="/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/huma" data-name="人文">人文</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="click to search..." />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href=""
+                   target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">Author</span>
+                    <a href=""
+                       target="_blank">Lixc</a>
+                    <span title="Last edited at&nbsp;2017-08-30">2017-08-30</span>
+                </p>
+                <p>good good study day day up!</p>
+            </div>
+            <h2 class="post-title">js事件冒泡</h2>
+            <div class="post-meta">
+                emm... 2731 words in the article |
+                you are the&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>th friend who reading now
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>气泡会从水底向上移动到水面，这就是冒泡。Javascript中的冒泡机制就是将事件当作气泡，由内而外冒出去。</p>
+<h2 id="1、事件的发生过程"><a href="#1、事件的发生过程" class="headerlink" title="1、事件的发生过程"></a>1、事件的发生过程</h2><p>一个事件从发生到执行有三个过程：</p>
+<p>1.事件的捕获阶段：从外到内</p>
+<p>2.事件的目标阶段：目标元素本身</p>
+<p>3.事件的冒泡阶段：从内向外</p>
+<p>为了解释这个问题，我们来举个例子：</p>
+<p><img src="js%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/1.png" alt="事件触发"></p>
+<p>当我们点击div2时，首先会进入事件的捕获阶段：</p>
+<p>先由外到里来找事件的真正触发者，操作系统–&gt;对应应用程序–&gt;window–&gt;body–&gt;div1–&gt;div2；</p>
+<p>再到事件的第二阶段：确定事件的真正触发者是div2；</p>
+<p>最后来到事件的冒泡阶段：由内向外传递事件（顺序与捕获阶段相反）和真正触发者对象（后文简称为 触发对象），执行div2中的onclick事件后，在向他的父亲元素传递事件和对象，若父亲元素存在onclick事件则执行；再继续向上传递事件和对象，以此内推知道无父亲元素为止。</p>
+<p>注：关于事件的捕获阶段和事件的冒泡阶段可以用以下函数来模拟</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 目标元素. addEventListener(操作,绑定的函数,boolean);</span><br><span class="line">element.addEventListener(&#39;click&#39;,function()&#123;&#125;,true);  &#x2F;&#x2F;捕获阶段</span><br><span class="line">element.addEventListener(&#39;click&#39;,function()&#123;&#125;,false); &#x2F;&#x2F;冒泡阶段</span><br></pre></td></tr></table></figure>
+
+<p>要切实说明这个问题，我们来看一个例子：</p>
+<p>css代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#red &#123;</span><br><span class="line">    width: 400px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">#yellow &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 300px;</span><br><span class="line">    background-color: yellow;</span><br><span class="line">&#125;</span><br><span class="line">#blue &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    background-color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HTML代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;red&quot;&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;yellow&quot;&gt;</span><br><span class="line">        &lt;div id&#x3D;&quot;blue&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Javascript代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var red &#x3D; GEBID$(&#39;red&#39;);</span><br><span class="line">var yellow &#x3D; GEBID$(&#39;yellow&#39;);</span><br><span class="line">var blue &#x3D; GEBID$(&#39;blue&#39;);</span><br><span class="line"></span><br><span class="line">blue.onclick &#x3D; function(e)&#123;  &#x2F;&#x2F;这里的 e 便是触发事件（点击事件）</span><br><span class="line">    console.log(&#39;蓝色&#39;);</span><br><span class="line">    console.log(e.target);  &#x2F;&#x2F;e.target  触发事件的对象元素（触发对象）</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*yellow.onclick &#x3D; function(e)&#123;</span><br><span class="line">    console.log(&#39;黄色&#39;);</span><br><span class="line">    console.log(e.target);</span><br><span class="line">&#125;*&#x2F;</span><br><span class="line"></span><br><span class="line">red.onclick &#x3D; function(e)&#123;</span><br><span class="line">    console.log(&#39;红色&#39;);</span><br><span class="line">    console.log(e.target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="js%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/2.png" alt="界面预览"></p>
+<p><a target="_blank" rel="noopener" href="https://howlcn1997.github.io/2019/09/27/%E6%B5%85%E6%9E%90Javascript%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E6%9C%BA%E5%88%B6/%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88.png">界面预览</a></p>
+<p>当我们点击blue时，bule的onclick被触发，查看blue中是否有onclik事件，若有则执行输出语句，执行结束后会根据冒泡机制向上一层传递事件和触发对象至yellow，但此时yellow中并未绑定onclick事件，所以不执行输出语句，继续向上传递；到red后，由于red绑定了onclick事件，则执行输出语句；在传递给body……控制台结果如下：</p>
+<p><img src="js%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/3.png" alt="执行结果"></p>
+<p>我们发现：虽然red也执行了它自身的事件函数，但是触发对象却仍然是blue。这是因为虽然我们没有点击red，但是我们点击了blue，而blue会将这一点击信号通过冒泡机制向上传递，传递过程中只要遇到绑定有onclick事件的元素便会触发其事件函数，但这沿路走过的一直都是我们最初所点击的那位始作俑者。</p>
+<p><strong>值得注意的是：</strong></p>
+<p>1.当我们点击blue而触发事件，并引发冒泡机制后，yellow和red所执行的 <strong>element.onclick = function(e){}</strong> 中的e所代表的事件是同一个事件，是由blue通过冒泡机制传递过来的。</p>
+<p>2.只要没有阻止冒泡机制或者说冒泡机制生效，无论当前元素是否绑定onclick事件，它都会向上传递点击事件。</p>
+<h2 id="2、如何阻止冒泡机制"><a href="#2、如何阻止冒泡机制" class="headerlink" title="2、如何阻止冒泡机制"></a>2、如何阻止冒泡机制</h2><p>当我们需要点击blue而不触发其祖先元素的事件时，我们只需要在blue的事件函数中加入以下代码即可（已做了兼容性处理）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function stopBubble(e) &#123; </span><br><span class="line">&#x2F;&#x2F;如果提供了事件对象，则这是一个非IE浏览器 </span><br><span class="line">if ( e &amp;&amp; e.stopPropagation ) </span><br><span class="line">    &#x2F;&#x2F;因此它支持W3C的stopPropagation()方法 </span><br><span class="line">    e.stopPropagation(); </span><br><span class="line">else </span><br><span class="line">    &#x2F;&#x2F;否则，我们需要使用IE的方式来取消事件冒泡 </span><br><span class="line">    window.event.cancelBubble &#x3D; true; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blue.onclick &#x3D; function(e)&#123; </span><br><span class="line">    console.log(&#39;蓝色&#39;);</span><br><span class="line">    console.log(e.target);</span><br><span class="line">    function stopBubble(e); &#x2F;&#x2F;断开冒泡机制链  使得事件不会继续向上传递</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+                
+
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Donate
+            </a>
+        </div>
+        
+        <div class="post-tags">Tags：
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">This article just represents my own viewpoint. If there is something wrong, please correct me.</p>
+    
+    
+    
+
+</div>
+
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="About">About</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="Help" >Help</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="Links">Links</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="SiteMap">SiteMap</a>
+        </p>
+        <p>
+            Has been established&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbspDays，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">Based on Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a><br/>
+            ©2017-<span id="cpYear"></span> Based on&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，Theme by&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，Author&nbsp<a href="" target="_blank" rel="friend">Lixc</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+
+<script src="/js/zepto.min.js"></script>
+
+
+<script src="/js/SimpleCore.js"></script>
+
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="Input query keywords here..."/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            rootUrl: 'https://lixc931029.github.io/',
+            buildingTime: '01/20/2018',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            snsQRCode: '/images/sns-qrcode.png',
+            donateImg: '/images/donate-qr.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+        SimpleCore.init(jsi_config);
+        
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+        
+    });
+</script>
+</body>
+</html>
